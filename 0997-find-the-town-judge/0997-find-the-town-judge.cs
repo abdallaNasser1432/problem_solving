@@ -1,23 +1,23 @@
 public class Solution {
     public int FindJudge(int n, int[][] trust){
         
-        Dictionary<int,int> isTrusted = new Dictionary<int,int>();
-        for (int i = 0; i < trust.Length; i++)
-        {
-            if (isTrusted.ContainsKey(trust[i][0]))
-                isTrusted[trust[i][0]]--;
-            else
-                isTrusted.Add(trust[i][0],-1);
-            if (!isTrusted.ContainsKey(trust[i][1]))
-                isTrusted.Add(trust[i][1],1);
-            else
-                isTrusted[trust[i][1]]++;
+        int[] trusting = new int[n + 1];
+        int[] trusted = new int[n + 1];
+
+        for (int i = 0; i < trust.Length; i++) {
+            trusting[trust[i][0]]++;
+            trusted[trust[i][1]]++;
         }
-        foreach (var item in isTrusted)
-        {
-            if (item.Value == n - 1)
-                return item.Key;
+
+        int ans = -1;
+
+        for (int i = 1; i <= n; i++) {
+            if (trusting[i] == 0 && trusted[i] == n - 1){
+                ans = i;
+                return ans;
+            }
         }
-        return (isTrusted.Count == 0 && n==1)?1:-1;
+
+        return ans;
     }
 }
