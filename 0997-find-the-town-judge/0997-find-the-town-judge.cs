@@ -1,23 +1,17 @@
 public class Solution {
     public int FindJudge(int n, int[][] trust){
         
-        int[] trusting = new int[n + 1];
-        int[] trusted = new int[n + 1];
-
-        for (int i = 0; i < trust.Length; i++) {
-            trusting[trust[i][0]]++;
-            trusted[trust[i][1]]++;
+        int[] isTrusted = new int[n+1];
+        for (int i = 0; i < trust.Length; i++)
+        {
+            isTrusted[trust[i][1]]++;
+            isTrusted[trust[i][0]]--;
         }
-
-        int ans = -1;
-
-        for (int i = 1; i <= n; i++) {
-            if (trusting[i] == 0 && trusted[i] == n - 1){
-                ans = i;
-                return ans;
-            }
+        for (int i = 1; i <=n; i++)
+        {
+            if (isTrusted[i]==n-1)
+                return i;
         }
-
-        return ans;
+        return (trust.Length == 0 && n == 1 )?1:-1;
     }
 }
