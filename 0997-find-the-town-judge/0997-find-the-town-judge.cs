@@ -12,6 +12,6 @@ public class Solution {
             if (isTrusted[i]==n-1)
                 return i;
         }
-        return (trust.Length == 0 && n == 1 )?1:-1;
+        return -1;
     }
 }
