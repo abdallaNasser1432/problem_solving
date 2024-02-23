@@ -7,7 +7,7 @@ public class Solution {
 
         for (int i = 0; i <= k; i++)
         {
-            int[] temp = (int[])dp.Clone();
+            int[] temp = dp.ToArray();
             foreach (int[] flight in flights)
                if (dp[flight[0]] != int.MaxValue)
                  temp[flight[1]] = Math.Min(temp[flight[1]], dp[flight[0]] + flight[2]);
