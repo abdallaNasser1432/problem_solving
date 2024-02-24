@@ -1,15 +1,22 @@
 public class Solution {
     public IList<int> FindDisappearedNumbers(int[] nums)
     {
-        IList<int>result= new List<int>();
-        int[] freq = new int[nums.Length+1];
-        for (int i = 0; i < nums.Length; i++) freq[nums[i]]++;
-
-        for (int i = 1;i < freq.Length;i++)
+        IList<int>result= new List<int>(); int temp = 0;
+        for (int i = 0; i < nums.Length; i++)
         {
-            if (freq[i] == 0)
+            int index = nums[i] - 1;
+            while (nums[index] != index + 1)
             {
-                result.Add(i);
+                temp = nums[index];
+                nums[index] = index + 1;
+                index = temp - 1;
+            }
+        }
+        for (int i = 0;i < nums.Length;i++)
+        {
+            if (nums[i]!=i+1)
+            {
+                result.Add(i + 1);
             }
         }
         return result;
