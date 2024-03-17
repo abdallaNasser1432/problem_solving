@@ -1,34 +1,22 @@
 public class Solution {
-    public  int[][] Insert(int[][] intervals, int[] newInterval)
-{
-    List<List<int>> list = new List<List<int>>(); bool isInserted = false;
-    foreach (var item in intervals)
-    {
-        if ((item[0] > newInterval[0] && item[0] > newInterval[1] && !isInserted))// ---- #####
+    public  int[][] Insert(int[][] intervals, int[] newInterval){
+        List<List<int>> list = new List<List<int>>();
+        foreach (var item in intervals)
         {
-            list.Add([newInterval[0], newInterval[1]]);
-            list.Add([item[0], item[1]]);
-            isInserted = true;
+            if (item[0] > newInterval[1])// ---- #####
+            {
+                list.Add([newInterval[0], newInterval[1]]);
+                newInterval = item;
+            }
+            else if (item[1] < newInterval[0])// ######## ----
+                list.Add([item[0], item[1]]);
+            else
+            {
+                newInterval[0] = Math.Min(newInterval[0], item[0]);
+                newInterval[1] = Math.Max(newInterval[1], item[1]);
+            }
         }
-        else if ((item[0] > newInterval[0] && item[1] < newInterval[1])) continue; // ----#####-----
-        else if ((item[0] <= newInterval[0] && item[1] >= newInterval[0]&& item[1] < newInterval[1])) // ##-----###-----
-        {
-            newInterval[0] = item[0];
-        }
-        else if ((item[0] >= newInterval[0] && item[1] >= newInterval[1] && item[0] <= newInterval[1]))// -----####----#####
-        {
-            list.Add([newInterval[0], item[1]]);
-            isInserted = true;
-        }
-
-        else
-{
-    if ((item[0] <= newInterval[0] && item[1] >= newInterval[1])) isInserted=true;
-    list.Add([item[0], item[1]]);
-}
+        list.Add([newInterval[0], newInterval[1]]);
+        return list.Select(i => i.ToArray()).ToArray();
     }
-    if (!isInserted) list.Add([newInterval[0], newInterval[1]]);
-
-    return list.Select(i=> i.ToArray()).ToArray();
-}
 }
