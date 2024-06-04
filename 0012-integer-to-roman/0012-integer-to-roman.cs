@@ -1,52 +1,29 @@
 public class Solution {
-    public  string IntToRoman(int num)
-{
-    
-    
-    StringBuilder roman = new StringBuilder();
-    string digts = num.ToString(); int Count = digts.Length;
-    for (int i = 0; i < digts.Length; i++)
-    {
-        if(Count == 4)
+    public  string IntToRoman(int num){
+        string[]  array = ["V","IX","IV","I","L","XC","XL","X","D","CM","CD","C"];
+        StringBuilder roman = new StringBuilder();
+        string digts = num.ToString(); int Count = digts.Length,index;
+        for (int i = 0; i < digts.Length; i++)
         {
-            roman.Append('M', digts[i]-'0');
-        }
-        else if (Count == 3)
-        {
-            if(digts[i] - '0' < 4) roman.Append('C', digts[i] - '0');
-            else if(digts[i] - '0' == 4) roman.Append("CD");
-            else if(digts[i] - '0' == 9) roman.Append("CM");
+            if(Count == 4)
+            {
+                roman.Append('M', digts[i]-'0');
+            }
             else
             {
-                roman.Append('D');
-                roman.Append('C', (digts[i] - '0') -5);
+                index = 4 * Count;
+                if (digts[i] - '0' < 4) roman.Append(char.Parse(array[index-1]), digts[i] - '0');
+                else if (digts[i] - '0' == 4) roman.Append(array[index - 2]);
+                else if (digts[i] - '0' == 9) roman.Append(array[index - 3]);
+                else
+                {
+                    roman.Append(array[index - 4]);
+                    roman.Append(char.Parse(array[index - 1]), (digts[i] - '0') - 5);
+                }
             }
+            Count--;
         }
-        else if (Count == 2)
-        {
-            if (digts[i] - '0' < 4) roman.Append('X', digts[i] - '0');
-            else if (digts[i] - '0' == 4) roman.Append("XL");
-            else if (digts[i] - '0' == 9) roman.Append("XC");
-            else
-            {
-                roman.Append('L');
-                roman.Append('X', digts[i] - '0' - 5);
-            }
-        }
-        else if (Count == 1)
-        {
-            if (digts[i] - '0' < 4) roman.Append('I', digts[i] - '0');
-            else if (digts[i] - '0' == 4) roman.Append("IV");
-            else if (digts[i] - '0' == 9) roman.Append("IX");
-            else
-            {
-                roman.Append('V');
-                roman.Append('I', (digts[i] - '0') - 5);
-            }
-        }
-        Count--;
+        return roman.ToString();
     }
 
-    return roman.ToString();
-}
 }
