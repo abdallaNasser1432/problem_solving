@@ -2,9 +2,9 @@ public class Solution {
     public int NumMagicSquaresInside(int[][] grid){
     if (grid.Length * grid[0].Length < 9) return 0;
     int result = 0;
-    for (int i = 0; i < grid.Length; i++)
+    for (int i = 0; i < grid.Length-2; i++)
     {
-        for (int j = 0; j < grid[0].Length; j++)
+        for (int j = 0; j < grid[0].Length-2; j++)
             if (isMagicSquare(grid, i, j)) result++;
     }
     return result;
@@ -12,8 +12,7 @@ public class Solution {
 
     private bool isMagicSquare(int[][] grid, int i, int j){
         
-    if (i + 2 < grid.Length && j + 2 < grid[i].Length)
-    {
+   
         int col1 = grid[i][j] + grid[i + 1][j] + grid[i + 2][j];
         int col2 = grid[i][j + 1] + grid[i + 1][j + 1] + grid[i + 2][j + 1];
         int col3 = grid[i][j + 2] + grid[i + 1][j + 2] + grid[i + 2][j + 2];
@@ -42,7 +41,6 @@ public class Solution {
             }
             return true;
         }
-    }
     return false;
 }
 }
