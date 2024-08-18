@@ -5,7 +5,7 @@ public class Solution {
         {
             if (s[i] != '*')
                 stack.Push(s[i]);
-            if (s[i] == '*' && stack.Count != 0)
+            else
                 stack.Pop();
         }
         StringBuilder result = new StringBuilder();
