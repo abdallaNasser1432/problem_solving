@@ -11,18 +11,21 @@
  */
 public class Solution {
     public ListNode ModifiedList(int[] nums, ListNode head) {
+        var current = head;
+        ListNode previous = null;
         HashSet<int> set = new(nums);
-        for (ListNode current = head, previous = null; current != null; current = current.next)
+        while(current != null)
         {
             if (set.Contains(current.val))
             {
                 if (previous == null)
-                    head = current.next;
+                    head = head.next;
                 else
                     previous.next = current.next;
             }
             else
                 previous = current;
+            current = current.next;
         }
         return head;
     }
