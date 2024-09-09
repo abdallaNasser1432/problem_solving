@@ -18,32 +18,32 @@ public class Solution {
             Array.Fill(matrix[i], -1);
         }
 
-        int startRow = 0, endRow = matrix.Length - 1, startCol = 0, endCol = matrix[0].Length - 1; 
-        while (startRow <= endRow && startCol <= endCol && head != null)
+        int startRow = 0, endRow = matrix.Length - 1, startCol = 0, endCol = matrix[0].Length - 1; ListNode current = head;
+        while (startRow <= endRow && startCol <= endCol && current != null)
         {
-            for (int i = startCol; i <= endCol && startRow <= endRow && head != null; i++)
+            for (int i = startCol; i <= endCol && startRow <= endRow && current != null; i++)
             {
-                matrix[startRow][i] = head.val;
-                head = head.next;
+                matrix[startRow][i] = current.val;
+                current = current.next;
             }
 
             startRow++;
-            for (int i = startRow; i <= endRow && startCol <= endCol && head != null; i++)
+            for (int i = startRow; i <= endRow && startCol <= endCol && current != null; i++)
             {
-                matrix[i][endCol] = head.val;
-                head = head.next;
+                matrix[i][endCol] = current.val;
+                current = current.next;
             }
             endCol--;
-            for (int i = endCol; i >= startCol && startRow <= endRow && head != null; i--)
+            for (int i = endCol; i >= startCol && startRow <= endRow && current != null; i--)
             {
-                matrix[endRow][i] = head.val;
-                head = head.next;
+                matrix[endRow][i] = current.val;
+                current = current.next;
             }
             endRow--;
-            for (int i = endRow; i >= startRow && startCol <= endCol && head != null; i--)
+            for (int i = endRow; i >= startRow && startCol <= endCol && current != null; i--)
             {
-                matrix[i][startCol] = head.val;
-                head = head.next;
+                matrix[i][startCol] = current.val;
+                current = current.next;
             }
             startCol++;
         }
