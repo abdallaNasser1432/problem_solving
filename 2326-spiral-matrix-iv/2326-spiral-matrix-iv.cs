@@ -19,7 +19,7 @@ public class Solution {
         }
 
         int startRow = 0, endRow = matrix.Length - 1, startCol = 0, endCol = matrix[0].Length - 1; ListNode current = head;
-        while (startRow <= endRow && startCol <= endCol && current != null)
+        while ( current != null)
         {
             for (int i = startCol; i <= endCol && startRow <= endRow && current != null; i++)
             {
