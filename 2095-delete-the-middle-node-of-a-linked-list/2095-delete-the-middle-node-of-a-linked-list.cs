@@ -11,29 +11,25 @@
  */
 public class Solution {
     public ListNode DeleteMiddle(ListNode head) {
+        
         if (head == null || head.next == null) {
             return null; 
         }
-        int size = 0;
-        var current = head;
-        while (current != null)
-        {
-            size++;
-            current = current.next;
+        
+        ListNode slow = head;
+        ListNode fast = head;
+        ListNode prev = null;
+
+        
+        while (fast != null && fast.next != null) {
+            prev = slow;
+            slow = slow.next;
+            fast = fast.next.next;
         }
-        var prev = new ListNode(-1,null); int mid = size / 2;
-        current = head;
-        while (current!= null)
-        {
-            if(mid-- == 0)
-            {
-                if (prev != null)
-                    prev.next = current.next;
-                break;
-            }
-            prev = current;
-            current = current.next;
-        }
+        
+        
+        prev.next = slow.next;
+        
         return head;
     }
 }
