@@ -2,12 +2,18 @@ public class FindSumPairs {
 
     private int[] _nums1 = Array.Empty<int>();
     private int[] _nums2 = Array.Empty<int>();
+    private Dictionary<int, int> freq = new Dictionary<int, int>();
     private Dictionary<int, int> freq2 = new Dictionary<int, int>();
 
     public FindSumPairs(int[] nums1, int[] nums2)
     {
         _nums1 = nums1;
         _nums2 = nums2;
+        foreach (int i in _nums1)
+        {
+            if (freq.ContainsKey(i)) freq[i]++;
+            else freq[i] = 1;
+        }
         foreach (int i in _nums2)
         {
             if (freq2.ContainsKey(i)) freq2[i]++;
@@ -32,8 +38,8 @@ public class FindSumPairs {
         freq2[newVal]++;
     }
 
-
-    public int Count(int tot) => _nums1.Sum(p => freq2.ContainsKey(tot - p) ? freq2[tot - p] : 0);
+    public int Count(int tot) =>
+     freq.Sum(p=> (freq2.ContainsKey(tot - p.Key) ? p.Value * freq2[tot - p.Key] : 0));
 
     }
 
